@@ -38,7 +38,7 @@ import { SeedsModule } from './seeds/seeds.module';
         const base = {
           type: 'postgres' as const,
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
-          synchronize: !isProduction,
+          synchronize: process.env.DB_SYNC === 'true' || process.env.NODE_ENV !== 'production',
           ...(isProduction && { ssl: { rejectUnauthorized: false } }),
         };
 
